@@ -1,0 +1,27 @@
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.swirldslabs</groupId>
+    <artifactId>voting-contract</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+  </parent>
+
+  <artifactId>web3j-hedera-support</artifactId>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.web3j</groupId>
+      <artifactId>core</artifactId>
+      <version>4.9.4</version>
+    </dependency>
+    <dependency>
+      <groupId>com.hedera.hashgraph</groupId>
+      <artifactId>sdk</artifactId>
+      <version>2.21.0</version>
+    </dependency>
+  </dependencies>
+
+</project>
