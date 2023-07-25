@@ -24,7 +24,7 @@ public class ContractDeploymentUtils {
 
     public static byte[] readBin(final String contractName) throws IOException {
         final URL resource = ContractDeploymentUtils.class.getClassLoader().getResource(
-                "eu.javaland.javacoin.contract.generated/" + contractName + ".bin");
+                "com/swirldslabs/voting/contract/generated/" + contractName + ".bin");
         if (resource == null) {
             throw new IllegalStateException(
                     "contract bytecode file not found. Please execute the 'web3j:generate-sources' maven goal first.");
