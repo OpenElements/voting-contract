@@ -20,7 +20,7 @@
     <dependency>
       <groupId>io.grpc</groupId>
       <artifactId>grpc-netty-shaded</artifactId>
-      <version>1.44.1</version>
+      <version>1.44.2</version>
       <scope>runtime</scope>
     </dependency>
     <dependency>
@@ -45,7 +45,7 @@
       <plugin>
         <groupId>org.web3j</groupId>
         <artifactId>web3j-maven-plugin</artifactId>
-        <version>4.9.4</version>
+        <version>4.10.0</version>
         <executions>
           <execution>
             <id>generate-sources</id>
@@ -77,7 +77,7 @@
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>build-helper-maven-plugin</artifactId>
-        <version>3.3.0</version>
+        <version>3.4.0</version>
         <executions>
           <execution>
             <id>add-source</id>
@@ -112,5 +112,4 @@
       </plugin>
     </plugins>
   </build>
-
 </project>
