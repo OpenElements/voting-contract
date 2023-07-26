@@ -37,7 +37,6 @@ public class VotingController {
         return "authorize-user";
     }
 
-
     @RequestMapping(value = "/winner", method = RequestMethod.GET)
     public String winnerView(final Model model) {
         Objects.requireNonNull(model);
@@ -45,7 +44,6 @@ public class VotingController {
         model.addAttribute("winner", name);
         return "winner";
     }
-
 
     @RequestMapping(value = "/vote", method = RequestMethod.GET)
     public String voteView(final Model model) {

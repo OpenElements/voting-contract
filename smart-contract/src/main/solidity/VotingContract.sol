@@ -8,12 +8,6 @@ pragma solidity 0.8.17;
  */
 contract VotingContract {
 
-    address public admin;
-
-    enum VoterState { NotAuthorized, Authorized, Voted }
-
-    mapping(address => VoterState) public voters;
-
     struct Proposal {
         bytes32 name;
         uint count;
@@ -27,8 +21,6 @@ contract VotingContract {
      * @param proposalNames names of proposals
      */
     constructor(bytes32[] memory proposalNames) {
-        admin = msg.sender;
-
         for (uint i = 0; i < proposalNames.length; i++) {
             Proposal memory proposal = Proposal({
                 name: proposalNames[i],
@@ -53,10 +45,7 @@ contract VotingContract {
      * @param voter address of voter
      */
     function authorize(address voter) public {
-        require(msg.sender == admin, "Only admin can authorize");
-        require(voters[voter] == VoterState.NotAuthorized, "Already authorized");
 
-        voters[voter] = VoterState.Authorized;
     }
 
     /**
@@ -65,9 +54,6 @@ contract VotingContract {
      * @param proposal index of proposal
      */
     function vote(uint proposal) public {
-        require(voters[msg.sender] == VoterState.Authorized, "Not authorized");
-
-        voters[msg.sender] = VoterState.Voted;
         proposals[proposal].count++;
     }
 
