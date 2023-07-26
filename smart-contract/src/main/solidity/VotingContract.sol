@@ -21,13 +21,7 @@ contract VotingContract {
      * @param proposalNames names of proposals
      */
     constructor(bytes32[] memory proposalNames) {
-        for (uint i = 0; i < proposalNames.length; i++) {
-            Proposal memory proposal = Proposal({
-                name: proposalNames[i],
-                count: 0
-            });
-            proposals.push(proposal);
-        }
+
     }
 
     /**
@@ -36,7 +30,7 @@ contract VotingContract {
      * @return number of proposals
      */
     function proposalsCount() public view returns (uint) {
-        return proposals.length;
+        return 0;
     }
 
     /**
@@ -45,7 +39,6 @@ contract VotingContract {
      * @param voter address of voter
      */
     function authorize(address voter) public {
-
     }
 
     /**
@@ -54,7 +47,6 @@ contract VotingContract {
      * @param proposal index of proposal
      */
     function vote(uint proposal) public {
-        proposals[proposal].count++;
     }
 
     /**
@@ -64,12 +56,5 @@ contract VotingContract {
      */
     function winner() public view returns (bytes32 result) {
         result = "";
-        uint maxCount = 0;
-        for (uint i = 0; i < proposals.length; i++) {
-            if (proposals[i].count > maxCount) {
-                maxCount = proposals[i].count;
-                result = proposals[i].name;
-            }
-        }
     }
 }
