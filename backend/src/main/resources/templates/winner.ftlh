@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <#include "head-meta.ftlh">
-</head>
+<#include "head.ftlh">
 <body>
-<#include "header.ftlh">
+<#include "navigation-header.ftlh">
 
 <main class="container mx-auto py-12">
   <p>Winner: ${winner}</p>
