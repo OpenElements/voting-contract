@@ -9,11 +9,7 @@
     <p>${message}</p>
   </#if>
   <#if proposals?? >
-    <form action="/vote" method="post">
-      <p>
-        <label for="privateKey">User DER Encoded Private Key</label>
-        <input id="privateKey" name="privateKey" type="text"/>
-      </p>
+    <form action="/simple-vote" method="post">
       <select name="selected">
           <#list proposals as value>
             <option value="${value.id()}">${value.name()}</option>

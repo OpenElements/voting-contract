@@ -9,46 +9,77 @@ import com.swirldslabs.voting.contract.generated.VotingContract;
 import io.github.cdimascio.dotenv.Dotenv;
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
-import java.util.Objects;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.IntStream;
 import org.springframework.stereotype.Service;
 import org.web3j.crypto.Credentials;
 import org.web3j.protocol.Web3j;
+import org.web3j.tuples.generated.Tuple2;
 import org.web3j.tx.gas.StaticGasProvider;
 
 @Service
 public class VotingService {
 
-    public void authorizeUser(String adminAccount, String userAccount) {
+    public List<Proposal> getAllProposals() {
         try {
-            getContract(adminAccount).authorize(userAccount).send();
-        } catch (Exception e) {
+            final String hederaPrivateKey = getPrivateKeyFromEnv();
+            final int count = getContract(hederaPrivateKey).proposalsCount().send().intValue();
+            return IntStream.range(0, count)
+                    .mapToObj(i -> {
+                        try {
+                            final Tuple2<byte[], BigInteger> tuple = getContract(hederaPrivateKey).proposals(
+                                    BigInteger.valueOf(i)).send();
+                            final String name = new String(tuple.component1(), StandardCharsets.UTF_8);
+                            return new Proposal(i, name);
+                        } catch (final Exception e) {
+                            throw new RuntimeException("Error in calling contract", e);
+                        }
+                    })
+                    .toList();
+        } catch (final Exception e) {
             throw new RuntimeException("Error in calling contract", e);
         }
     }
 
-    public void vote(String account, Proposal proposal) {
+    public void authorizeUser(final String userAccount) {
         try {
-            getContract(account).vote(BigInteger.valueOf(proposal.getId())).send();
-        } catch (Exception e) {
+            final String hederaPrivateKey = getPrivateKeyFromEnv();
+            getContract(hederaPrivateKey).authorize(userAccount).send();
+        } catch (final Exception e) {
             throw new RuntimeException("Error in calling contract", e);
         }
     }
 
-    public Proposal getWinner() {
+    public void vote(final String privateKey, final Proposal proposal) {
         try {
-            final String hederaPrivateKey = Dotenv.load().get("HEDERA_PRIVATE_KEY");
-            final byte[] send = getContract(hederaPrivateKey).winningProposal().send();
-            String name = new String(send, StandardCharsets.UTF_8);
-            return Arrays.stream(Proposal.values()).filter(v -> Objects.equals(v.getName(), name)).findAny().orElseThrow(() -> new IllegalStateException("Propsal '" + name + "' not found"));
-        } catch (Exception e) {
+            getContract(privateKey).vote(BigInteger.valueOf(proposal.id())).send();
+        } catch (final Exception e) {
             throw new RuntimeException("Error in calling contract", e);
         }
     }
 
-    private VotingContract getContract(String account) {
+    public void vote(final Proposal proposal) {
+        try {
+            getContract(getPrivateKeyFromEnv()).vote(BigInteger.valueOf(proposal.id())).send();
+        } catch (final Exception e) {
+            throw new RuntimeException("Error in calling contract", e);
+        }
+    }
+
+    public String getWinner() {
+        try {
+            final String hederaPrivateKey = getPrivateKeyFromEnv();
+            final byte[] send = getContract(hederaPrivateKey).winner().send();
+            return new String(send, StandardCharsets.UTF_8);
+        } catch (final Exception e) {
+            throw new RuntimeException("Error in calling contract", e);
+        }
+    }
+
+    private VotingContract getContract(final String privateKeyValue) {
         final HederaNode node = HederaNode.TESTNET;
-        final PrivateKey privateKey = PrivateKey.fromString(account);
+        final PrivateKey privateKey = PrivateKey.fromString(privateKeyValue);
 
         final Web3j web3j = HederaUtils.createWeb3j(node);
         final Credentials credentials = HederaUtils.toCredentials(privateKey);
@@ -63,8 +94,12 @@ public class VotingService {
                     credentials,
                     VotingContract.class,
                     VOTING_CONTRACT_ID, staticGasProvider);
-        } catch (Exception e) {
+        } catch (final Exception e) {
             throw new RuntimeException("Error in creating contract wrapper", e);
         }
+    }
+
+    private String getPrivateKeyFromEnv() {
+        return Dotenv.load().get("HEDERA_PRIVATE_KEY");
     }
 }

@@ -3,7 +3,7 @@
 pragma solidity 0.8.17;
 
 /**
- * @title Poll
+ * @title Voting
  * @dev Implements simple poll
  */
 contract VotingContract {
@@ -39,6 +39,15 @@ contract VotingContract {
     }
 
     /**
+     * @dev Get number of proposals
+     *
+     * @return number of proposals
+     */
+    function proposalsCount() public view returns (uint) {
+        return proposals.length;
+    }
+
+    /**
      * @dev Authorize 'voter' for this poll
      *
      * @param voter address of voter
@@ -65,15 +74,15 @@ contract VotingContract {
     /**
      * @dev Calculate the winning proposal
      *
-     * @return winner winning proposal
+     * @return result winning proposal
      */
-    function winningProposal() public view returns (bytes32 winner) {
-        winner = "";
+    function winner() public view returns (bytes32 result) {
+        result = "";
         uint maxCount = 0;
         for (uint i = 0; i < proposals.length; i++) {
             if (proposals[i].count > maxCount) {
                 maxCount = proposals[i].count;
-                winner = proposals[i].name;
+                result = proposals[i].name;
             }
         }
     }

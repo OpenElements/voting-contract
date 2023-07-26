@@ -1,5 +1,6 @@
 package com.swirldslabs.voting.voting;
 
+import java.util.List;
 import java.util.Objects;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,17 +25,14 @@ public class VotingController {
     }
 
     @RequestMapping(value = "/authorize-user", method = RequestMethod.POST)
-    public String onAuthorizeUserPost(final Model model, String admin, String account) {
+    public String onAuthorizeUserPost(final Model model, String evmAddress) {
         Objects.requireNonNull(model);
 
-        if(admin == null || admin.trim().isBlank()) {
-            showMessage("Please specify admin account", model);
-        } else if(account == null || account.trim().isBlank()) {
+        if(evmAddress == null || evmAddress.trim().isBlank()) {
             showMessage("Please specify user account", model);
-            model.addAttribute("admin", admin);
         } else {
-            votingService.authorizeUser(admin, account);
-            showMessage("Account '" + account + "' authorized", model);
+            votingService.authorizeUser(evmAddress);
+            showMessage("Account '" + evmAddress + "' authorized", model);
         }
         return "authorize-user";
     }
@@ -43,7 +41,7 @@ public class VotingController {
     @RequestMapping(value = "/winner", method = RequestMethod.GET)
     public String winnerView(final Model model) {
         Objects.requireNonNull(model);
-        final String name = votingService.getWinner().getName();
+        final String name = votingService.getWinner();
         model.addAttribute("winner", name);
         return "winner";
     }
@@ -53,26 +51,52 @@ public class VotingController {
     public String voteView(final Model model) {
         Objects.requireNonNull(model);
 
-        model.addAttribute("proposals", Proposal.values());
+        model.addAttribute("proposals", votingService.getAllProposals());
         return "vote";
     }
 
     @RequestMapping(value = "/vote", method = RequestMethod.POST)
-    public String onVote(final Model model, final String account, final int selected) {
+    public String onVote(final Model model, final String privateKey, final int selected) {
         Objects.requireNonNull(model);
 
-        if(account == null || account.trim().isBlank()) {
+        final List<Proposal> allProposals = votingService.getAllProposals();
+        if(privateKey == null || privateKey.trim().isBlank()) {
             showMessage("Please specify user account", model);
-            model.addAttribute("proposals", Proposal.values());
-        } else  if(selected < 0 || selected >= Proposal.values().length) {
+            model.addAttribute("proposals", allProposals);
+        } else  if(selected < 0 || selected >= allProposals.size()) {
             showMessage("Please select a valid proposal", model);
-            model.addAttribute("proposals", Proposal.values());
-            model.addAttribute("account", account);
+            model.addAttribute("proposals", allProposals);
+            model.addAttribute("privateKey", privateKey);
         } else {
-            votingService.vote(account, Proposal.values()[selected]);
-            showMessage("Selected: " + Proposal.values()[selected].getName(), model);
+            Proposal proposal = allProposals.get(selected);
+            votingService.vote(privateKey,  proposal);
+            showMessage("Selected: " + proposal.name(), model);
         }
         return "vote";
+    }
+
+    @RequestMapping(value = "/simple-vote", method = RequestMethod.GET)
+    public String simpleVoteView(final Model model) {
+        Objects.requireNonNull(model);
+
+        model.addAttribute("proposals", votingService.getAllProposals());
+        return "simple-vote";
+    }
+
+    @RequestMapping(value = "/simple-vote", method = RequestMethod.POST)
+    public String onSimpleVote(final Model model, final int selected) {
+        Objects.requireNonNull(model);
+
+        final List<Proposal> allProposals = votingService.getAllProposals();
+        if(selected < 0 || selected >= allProposals.size()) {
+            showMessage("Please select a valid proposal", model);
+            model.addAttribute("proposals", allProposals);
+        } else {
+            Proposal proposal = allProposals.get(selected);
+            votingService.vote(proposal);
+            showMessage("Selected: " + proposal.name(), model);
+        }
+        return "simple-vote";
     }
 
     private void showMessage(final String message, final Model model) {

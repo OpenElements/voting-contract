@@ -11,14 +11,10 @@
 
   <form action="/authorize-user" method="post">
     <p>
-      <label for="admin">Admin-Account</label>
-      <input id="admin" name="admin" type="text"/>
+      <label for="evmAddress">User EVM Address</label>
+      <input id="evmAddress" name="evmAddress" type="text"/>
     </p>
-    <p>
-      <label for="account">User-Account</label>
-      <input id="account" name="account" type="text"/>
-    </p>
-    <button>Authorize 123</button>
+    <button>Authorize</button>
   </form>
 </main>
 </body>
