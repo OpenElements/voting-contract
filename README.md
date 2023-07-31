@@ -58,7 +58,8 @@ found [here](https://help.hedera.com/hc/en-us/articles/360000664678-How-do-I-cre
 Once an application is ready you will normally deploy it on Mainnet. A step by step guide can be
 found [here](https://help.hedera.com/hc/en-us/articles/360000664618-Can-I-deploy-my-application-on-the-Hedera-mainnet-).
 
-**NOTE:** You can even setup a network on your local machine. This is super useful for testing and development. You can
+> **Note**
+> You can even setup a network on your local machine. This is super useful for testing and development. You can
 run integration tests automatically against such local network or use it to test your smart contracts when you are
 offline and can not use the testnet. The local network is open source and created based on Docker containers. You can
 find the source code on [GitHub](https://github.com/hashgraph/hedera-local-node).
