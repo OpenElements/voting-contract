@@ -154,7 +154,7 @@ final AccountId accountId=AccountId.fromString(accountIdValue);
 final PrivateKey privateKey=PrivateKey.fromString(privateKeyValue);
 final byte[]byteCode=ContractDeploymentUtils.readBin(contractName);
 
-        ContractDeploymentUtils.deploy(HederaNode.TESTNET,accountId,privateKey,byteCode);
+ContractDeploymentUtils.deploy(HederaNode.TESTNET,accountId,privateKey,byteCode);
 ```
 
 By executing the code the compiled smart contract will be deployed on the Hedera testnet. The id of the deployed smart
