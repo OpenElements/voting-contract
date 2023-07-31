@@ -152,7 +152,7 @@ final String privateKeyValue=Dotenv.load().get("HEDERA_PRIVATE_KEY");
 
 final AccountId accountId=AccountId.fromString(accountIdValue);
 final PrivateKey privateKey=PrivateKey.fromString(privateKeyValue);
-final byte[]byteCode=ContractDeploymentUtils.readBin(contractName);
+final byte[] byteCode=ContractDeploymentUtils.readBin(contractName);
 
 ContractDeploymentUtils.deploy(HederaNode.TESTNET,accountId,privateKey,byteCode);
 ```
