@@ -212,3 +212,19 @@ final HelloWorldContract statefulContract=HederaUtils.createContractWrapper(node
 ### 5. Creating a contract for voting
 
 TODO
+
+### 6. A simple ui for interacting with contracts
+
+The `backend` module of the project contains a [spring boot](https://spring.io/projects/spring-boot) application that provides a simple web ui to interact with smart contracts. The ui has several views while each view represents a single functionality of a contract like voting or authorizing an account to vote.
+
+TODO: How to start the `backend`.
+
+Once the backend is started it can be reached at [localhost:8080](http://localhost:8080).
+<img width="1303" alt="backend-view" src="https://github.com/OpenElements/voting-contract/assets/9443847/3ea8f121-3754-4429-92b4-e2890c51a9f4">
+
+### 7. How the backend calls smart contracts
+
+TODO
+
+
+
