@@ -79,6 +79,8 @@ You can think about this as a virtual machine that is running on the public ledg
 the public ledger and can be executed by anyone. The Hedera hashgraph is using the same EVM bytecode as Ethereum. This
 is why we can use the same smart contracts on both ledgers and interact with them by using web3j.
 
+<img width="1940" alt="smart-contract" src="https://github.com/OpenElements/voting-contract/assets/9443847/e314137c-1c05-4d14-a5f2-c76b95a4bd29">
+
 A "Hello World" smart contract is shown below:
 
 ```solidity 
@@ -92,7 +94,7 @@ contract MyContract {
 }
 ```
 
-A full documentation of the Solidity langauge can be found on
+A full documentation of the Solidity language can be found on
 the [official documentation](https://docs.soliditylang.org). Therefore we won't go into detail about the language in
 this tutorial.
 
