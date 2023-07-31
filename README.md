@@ -5,7 +5,7 @@ smart contracts can be deployed and used on the Hedera hashgraph.
 
 <img width="1940" alt="voting" src="https://github.com/OpenElements/voting-contract/assets/9443847/8ca457e2-707b-4b17-a2b0-3004406c1571">
 
-The tutorial was part of a workshop at [WeAreDevelopers 2023](https://www.wearedevelopers.com/world-congress) by [Michael Heinrichs](https://github.com/netopyr) and [Hendrik Ebbers](https://github.com/hendrikebbers). The slides of the workshop can be found here TODO:LINK.
+The tutorial was part of a workshop at [WeAreDevelopers 2023](https://www.wearedevelopers.com/world-congress) by [Michael Heinrichs](https://github.com/netopyr) and [Hendrik Ebbers](https://github.com/hendrikebbers). The slides of the workshop can be found here [here](https://github.com/OpenElements/voting-contract/files/12213123/Slides.pdf).
 
 ## Prerequisites
 
