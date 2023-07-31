@@ -164,7 +164,7 @@ contract successfully created with FileId '0.0.3818143' and ContractId '0.0.3216
 Once this is done we can interact with the contract by using its unique id.
 
 > **Note** 
-> The project contains the `deploy-hello-world-contract.sh` script that can be called to deploy the smart contract by calling the `HelloContractDeployment` java class. 
+> The project contains the `deploy-hello-world-contract.sh` script that can be called to deploy the smart contract by calling the `HelloContractDeployment` java class. The script can be used if you have no Java IDE. 
 
 ### 4. Interacting with a Smart Contract
 
@@ -213,20 +213,23 @@ final HelloWorldContract statefulContract=HederaUtils.createContractWrapper(node
 ```
 
 > **Note** 
-> The project contains the `call-hello-world-contract.sh` script that can be called to call the "Hello World" smart contract by calling the `HelloContractCall` java class. 
+> The project contains the `call-hello-world-contract.sh` script that can be called to call the "Hello World" smart contract by calling the `HelloContractCall` java class. The script can be used if you have no Java IDE. 
 
 ### 5. Creating a contract for voting
 
 TODO
 
 > **Note** 
-> The project contains the `deploy-voting-contract.sh` script that can be called to deploy the smart contract by calling the `VotingContractDeployment` java class. 
+> The project contains the `deploy-voting-contract.sh` script that can be called to deploy the smart contract by calling the `VotingContractDeployment` java class. The script can be used if you have no Java IDE.
 
 ### 6. A simple ui for interacting with contracts
 
 The `backend` module of the project contains a [spring boot](https://spring.io/projects/spring-boot) application that provides a simple web ui to interact with smart contracts. The ui has several views while each view represents a single functionality of a contract like voting or authorizing an account to vote.
 
 TODO: How to start the `backend`.
+
+> **Note** 
+> The project contains the `start-backend.sh` script that can be called to start the backend by calling the `Application` java class. The script can be used if you have no Java IDE.
 
 Once the backend is started it can be reached at [localhost:8080](http://localhost:8080).
 <img width="1303" alt="backend-view" src="https://github.com/OpenElements/voting-contract/assets/9443847/3ea8f121-3754-4429-92b4-e2890c51a9f4">
