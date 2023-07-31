@@ -163,6 +163,9 @@ contract successfully created with FileId '0.0.3818143' and ContractId '0.0.3216
 
 Once this is done we can interact with the contract by using its unique id.
 
+> **Note** 
+> The project contains the `deploy-hello-world-contract.sh` script that can be called to deploy the smart contract by calling the `HelloContractDeployment` java class. 
+
 ### 4. Interacting with a Smart Contract
 
 The smart contract that we have deployed in the previous step can be interacted with by using the generated Java
@@ -208,6 +211,9 @@ final HelloWorldContract statefulContract=HederaUtils.createContractWrapper(node
 
         logger.info("Greeting method result: {}",statefulContract.say_hello().send());
 ```
+
+> **Note** 
+> The project contains the `call-hello-world-contract.sh` script that can be called to call the "Hello World" smart contract by calling the `HelloContractCall` java class. 
 
 ### 5. Creating a contract for voting
 
