@@ -219,6 +219,9 @@ final HelloWorldContract statefulContract=HederaUtils.createContractWrapper(node
 
 TODO
 
+> **Note** 
+> The project contains the `deploy-voting-contract.sh` script that can be called to deploy the smart contract by calling the `VotingContractDeployment` java class. 
+
 ### 6. A simple ui for interacting with contracts
 
 The `backend` module of the project contains a [spring boot](https://spring.io/projects/spring-boot) application that provides a simple web ui to interact with smart contracts. The ui has several views while each view represents a single functionality of a contract like voting or authorizing an account to vote.
